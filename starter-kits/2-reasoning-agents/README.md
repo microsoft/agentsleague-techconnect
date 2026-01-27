@@ -1,182 +1,127 @@
 # 🧠 Reasoning Agents - Starter Kit
 
 **Track**: Reasoning Agents with Microsoft Foundry  
-**Time Limit**: 90 minutes
+**Time Limit**: 100 minutes
 
 Welcome to the Reasoning Agents track! In this challenge, you'll build intelligent agents using **Microsoft Foundry** (formerly Azure AI Foundry) that can solve complex problems through multi-step reasoning.
 
 ---
 
+## 🚀 Getting Started with Microsoft Foundry
+
+### What is Microsoft Foundry?
+
+Microsoft Foundry is your unified platform for building AI applications. It provides:
+- Access to powerful AI models (GPT-4o, o1, o3-mini, and more)
+- Tools for building agents with reasoning capabilities
+- Integration with Azure services
+- Built-in evaluation and monitoring
+
+### 👉 [Open Microsoft Foundry](https://ai.azure.com)
+
+---
+
 ## 💡 Project Ideas
 
-Given the 90-minute time constraint, here are some achievable project ideas:
+Here are some ideas that showcase multi-step reasoning:
 
-### Quick Wins (Recommended for beginners)
-- **Research Assistant Agent** - An agent that can research a topic and summarize findings
-- **Decision Helper Agent** - Help users make decisions by analyzing pros/cons
-- **Fact Checker Agent** - Verify claims by searching and cross-referencing information
-- **Meeting Notes Summarizer** - Extract action items and key points from meeting transcripts
+### Beginner-Friendly
+- **Research Assistant** - An agent that researches a topic and summarizes findings
+- **Decision Helper** - Help users make decisions by analyzing pros/cons
+- **Fact Checker** - Verify claims by reasoning through evidence
+- **Problem Solver** - Break down complex problems into steps
 
-### Intermediate Projects
-- **Multi-Step Problem Solver** - An agent that breaks down complex problems into steps
-- **Code Explanation Agent** - Explain code step-by-step with reasoning
-- **Travel Planning Agent** - Plan trips with logical reasoning about constraints
-- **Recipe Recommender Agent** - Suggest recipes based on available ingredients
+### Intermediate
+- **Code Explainer** - Explain code step-by-step with reasoning
+- **Travel Planner** - Plan trips with logical reasoning about constraints
+- **Recipe Recommender** - Suggest recipes based on ingredients with reasoning
+- **Debugging Assistant** - Help debug code through systematic analysis
 
-### Advanced Projects (If you're fast!)
-- **Multi-Agent Debate System** - Multiple agents discuss and refine answers
-- **Reasoning Chain Visualizer** - Show the agent's thought process visually
-- **Self-Correcting Agent** - An agent that validates and corrects its own responses
+### Advanced
+- **Multi-Agent System** - Multiple agents that collaborate on tasks
+- **Self-Correcting Agent** - An agent that validates and improves its own responses
+- **Chain-of-Thought Visualizer** - Show the agent's reasoning process
 
 ---
 
-## 🚀 Quick Start
+## 🎯 Quick Start Options
 
-### Prerequisites
+### Option 1: Use Microsoft Foundry Portal (Recommended)
 
-1. **Azure Subscription** - Access to Azure AI services
-2. **Python 3.10+** - Recommended for most examples
-3. **VS Code** - With Python extension
+1. Go to [ai.azure.com](https://ai.azure.com)
+2. Create or select a project
+3. Deploy a model (GPT-4o recommended for reasoning)
+4. Use the **Playground** to prototype your agent
+5. Export your code when ready
 
-### 5-Minute Setup (Python)
-
-1. **Create a new project folder and virtual environment**
-
-```bash
-mkdir my-reasoning-agent
-cd my-reasoning-agent
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-```
-
-2. **Install dependencies**
-
-```bash
-pip install azure-ai-projects azure-identity openai
-```
-
-3. **Set up environment variables**
-
-```bash
-# Create a .env file (don't commit this!)
-AZURE_OPENAI_ENDPOINT=https://your-endpoint.openai.azure.com/
-AZURE_OPENAI_API_KEY=your-api-key
-AZURE_OPENAI_DEPLOYMENT=gpt-4o
-```
-
-4. **Create your first agent**
+### Option 2: Use the Azure AI SDK
 
 ```python
-# agent.py
-import os
-from openai import AzureOpenAI
+# Install the SDK
+pip install azure-ai-projects azure-identity
 
-client = AzureOpenAI(
-    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-    api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-    api_version="2024-02-15-preview"
+# Quick example
+from azure.ai.projects import AIProjectClient
+from azure.identity import DefaultAzureCredential
+
+client = AIProjectClient(
+    credential=DefaultAzureCredential(),
+    endpoint="your-foundry-endpoint"
 )
 
-def reasoning_agent(question: str) -> str:
-    """A simple reasoning agent that thinks step by step."""
-    
-    response = client.chat.completions.create(
-        model=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
-        messages=[
-            {
-                "role": "system",
-                "content": """You are a reasoning agent. When answering questions:
-                1. Break down the problem into steps
-                2. Think through each step carefully
-                3. Show your reasoning process
-                4. Provide a clear final answer"""
-            },
-            {"role": "user", "content": question}
-        ],
-        temperature=0.7,
-        max_tokens=1000
-    )
-    
-    return response.choices[0].message.content
-
-# Example usage
-if __name__ == "__main__":
-    question = "Should I take an umbrella today if there's a 30% chance of rain?"
-    print(reasoning_agent(question))
+# Build your agent logic here
 ```
+
+### Option 3: Use GitHub Models
+
+If you have access to GitHub Models, you can prototype quickly:
+1. Go to [github.com/marketplace/models](https://github.com/marketplace/models)
+2. Try models directly in the browser
+3. Copy the code snippet to your project
 
 ---
 
-## 🧠 Reasoning Patterns & Best Practices
+## 🧠 Reasoning Patterns to Try
 
-### Chain-of-Thought Prompting
-
-```python
-CHAIN_OF_THOUGHT_PROMPT = """
-Let's solve this step by step:
-
-Step 1: [First step of reasoning]
-Step 2: [Second step of reasoning]
-...
-Final Answer: [Your conclusion]
-"""
+### Chain-of-Thought
+Ask the model to think step by step:
+```
+"Let's solve this step by step:
+1. First, I'll identify...
+2. Then, I'll analyze...
+3. Finally, I'll conclude..."
 ```
 
-### ReAct Pattern (Reasoning + Acting)
-
-```python
-REACT_PROMPT = """
-Thought: [What you're thinking about the problem]
-Action: [What action to take - e.g., search, calculate, lookup]
-Observation: [What you learned from the action]
-... (repeat as needed)
-Final Answer: [Your conclusion based on all observations]
-"""
+### ReAct (Reasoning + Acting)
+Combine thinking with actions:
+```
+Thought: What do I need to find out?
+Action: Search for information
+Observation: Here's what I found...
+Thought: Based on this, I should...
 ```
 
-### Self-Reflection Pattern
-
-```python
-REFLECTION_PROMPT = """
-Initial Answer: [Your first attempt]
-Reflection: [What could be wrong or improved?]
-Revised Answer: [Improved answer after reflection]
-Confidence: [How confident are you in this answer?]
-"""
+### Self-Reflection
+Have the agent check its own work:
 ```
-
----
-
-## 📋 Requirements & Evaluation
-
-### Core Requirements
-
-1. **Use Microsoft Foundry/Azure AI** - Your agent must use Azure AI services
-2. **Demonstrate reasoning** - Show clear multi-step thinking
-3. **Working demo** - Your agent must be functional
-
-### Evaluation Criteria
-
-| Criterion | Weight | Description |
-|-----------|--------|-------------|
-| Reasoning Quality | 30% | Clear, logical multi-step thinking |
-| Problem Solving | 25% | Effectively solves the target problem |
-| Technical Implementation | 25% | Clean code, good patterns |
-| Presentation | 20% | Clear demo, good documentation |
+Initial Answer: [response]
+Reflection: Is this correct? What could be wrong?
+Revised Answer: [improved response]
+```
 
 ---
 
 ## 📚 Resources
 
-### Microsoft Foundry Documentation
-- [Azure AI Foundry](https://learn.microsoft.com/en-us/azure/ai-studio/)
-- [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/)
-- [Prompt Engineering Guide](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/prompt-engineering)
+### Microsoft Foundry
+- [Microsoft Foundry Portal](https://ai.azure.com)
+- [Azure AI Documentation](https://learn.microsoft.com/azure/ai-studio/)
+- [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/)
 
-### Reasoning Patterns
+### Reasoning & Prompting
+- [Prompt Engineering Guide](https://learn.microsoft.com/azure/ai-services/openai/concepts/prompt-engineering)
 - [Chain-of-Thought Prompting](https://www.promptingguide.ai/techniques/cot)
 - [ReAct Pattern](https://www.promptingguide.ai/techniques/react)
-- [Self-Consistency](https://www.promptingguide.ai/techniques/consistency)
 
 ### Code Samples
 - [Azure AI Samples](https://github.com/Azure-Samples/azure-ai-samples)
@@ -184,23 +129,32 @@ Confidence: [How confident are you in this answer?]
 
 ---
 
+## 🆘 Need Help?
+
+- **Raise your hand** - Roaming experts are here to help
+- **Ask your tablemates** - Collaborate and learn together
+- **Check Microsoft Foundry docs** - [ai.azure.com](https://ai.azure.com)
+
+---
+
 ## ❓ FAQ
 
-### What models can I use?
+### What models should I use?
 
-Any models available in Azure OpenAI or Azure AI services. GPT-4o is recommended for complex reasoning.
+- **GPT-4o** - Great balance of speed and capability
+- **o1 / o3-mini** - Best for complex reasoning tasks
+- **GPT-4o-mini** - Fast and cost-effective for simpler tasks
 
-### Do I need to use Python?
+### Do I need to write code?
 
-No, but Python has the best SDK support. TypeScript/JavaScript and C# are also fully supported.
+Not necessarily! You can:
+- Use the Foundry Playground to build and test
+- Export code when you're ready
+- Or build entirely in the portal
 
 ### What if I don't have Azure access?
 
-Talk to a roaming expert - we can help you get access or pair you with someone who has access.
-
-### Can I use LangChain or other frameworks?
-
-Yes! Use whatever frameworks help you build faster.
+Talk to a roaming expert - we can help you get access or find an alternative approach.
 
 ---
 

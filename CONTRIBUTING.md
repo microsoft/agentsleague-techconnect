@@ -5,24 +5,21 @@ This repository supports the in-person Agents League hackathon at TechConnect.
 ## 🎯 What This Repo Is For
 
 This is an **internal Microsoft hackathon** repository. It contains:
+
 - Starter kits for each challenge track
 - Project submission templates
 - Event documentation
 
-## ✅ What We Welcome
+## ✅ We Welcome
 
 - **Bug reports** for starter kits or documentation
 - **Documentation fixes** (typos, clarifications, broken links)
 - **Improvements** to help future hackathon participants
 
-## ❌ What We Don't Accept
-
-- Changes to evaluation criteria during the event
-- Direct edits to competition submissions
-
 ## 🐛 Reporting Issues
 
 Found a bug? [Open an issue](https://github.com/microsoft/agentsleague-techconnect/issues/new) with:
+
 - Clear description of the problem
 - Steps to reproduce
 - Your environment (OS, versions)
@@ -30,11 +27,12 @@ Found a bug? [Open an issue](https://github.com/microsoft/agentsleague-techconne
 ## 📧 Questions?
 
 During the event:
+
 - **Raise your hand** - Roaming experts are here to help
 - **Ask your tablemates** - Collaborate and learn together
 
 After the event:
-- Email: <aycabas@microsoft.com>
+
 - Open an issue for discussion
 
 ---

@@ -1,7 +1,7 @@
 # 🎨 Creative Apps - Starter Kit
 
 **Track**: Creative Apps with GitHub Copilot  
-**Time Limit**: 90 minutes
+**Time Limit**: 100 minutes
 
 Welcome to the Creative Apps track! In this challenge, you'll build innovative applications using **GitHub Copilot** as your AI pair programmer. Show off your creativity and demonstrate what's possible when humans and AI code together.
 
@@ -9,7 +9,7 @@ Welcome to the Creative Apps track! In this challenge, you'll build innovative a
 
 ## 💡 Project Ideas
 
-Given the 90-minute time constraint, here are some achievable project ideas:
+Given the 100-minute time constraint, here are some achievable project ideas:
 
 ### Quick Wins (Recommended for beginners)
 - **AI-Powered CLI Tool** - Build a command-line utility that uses GitHub Copilot to generate helpful outputs
