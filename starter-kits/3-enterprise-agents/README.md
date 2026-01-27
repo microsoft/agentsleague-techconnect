@@ -355,4 +355,6 @@ Access official Microsoft documentation, tutorials, and learning paths:
 
 ---
 
+Questions? Join [Discord](https://aka.ms/agentsleague/discord) #enterprise-agents channel
+
 **Need help?** Raise your hand - roaming experts are here to assist you!
