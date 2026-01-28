@@ -1,90 +1,139 @@
 # 🧠 Reasoning Agents - Starter Kit
 
 **Track**: Reasoning Agents with Microsoft Foundry  
+
 **Time Limit**: 100 minutes
 
-Welcome to the Reasoning Agents track! In this challenge, you'll build intelligent agents using **Microsoft Foundry** (formerly Azure AI Foundry) that can solve complex problems through multi-step reasoning.
+Welcome to the Reasoning Agents track! In this challenge, you'll build intelligent agents using **Microsoft Foundry** that can solve complex problems through multi-step reasoning.
 
+---
+
+> [!IMPORTANT]
+> ## 🎒 Prerequisites - What to Bring
+> Before the hackathon, make sure you have the following ready:
+> 
+> | Requirement | Description |
+> |-------------|-------------|
+> | 💻 **Laptop** | Bring your own laptop and make sure you have internet access |
+> | ☁️ **Azure Subscription** | With model quotas available for deploying reasoning models |
+> | 🧑‍💻 **A code editor** | A code editor is needed if you go with the code-first approach - Visual Studio code recommended|
 ---
 
 ## 🚀 Getting Started with Microsoft Foundry
 
 ### What is Microsoft Foundry?
 
-Microsoft Foundry is your unified platform for building AI applications. It provides:
-- Access to powerful AI models (GPT-4o, o1, o3-mini, and more)
+[Microsoft Foundry](https://azure.microsoft.com/products/ai-foundry/) is your unified platform for building, testing and deploying AI agents and applications. It provides:
+
+- Access to powerful AI models from several providers
 - Tools for building agents with reasoning capabilities
 - Integration with Azure services
 - Built-in evaluation and monitoring
-
-### 👉 [Open Microsoft Foundry](https://ai.azure.com)
+- Enterprise-grade security and compliance
+- Interoperability through standard protocols like [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro) or [Agent2Agent (A2A)](https://a2a-protocol.org/latest/).
 
 ---
 
-## 💡 Project Ideas
+## 💡 Project Scenario
 
-Here are some ideas that showcase multi-step reasoning:
+The goal of this track is to build an AI agent that can *effectively assists the communication team of a company in creating social media content* for various platforms.
+Feel creative and choose a specific industry or type of brand to focus on, such as technology, fashion, food, or travel.
 
-### Beginner-Friendly
-- **Research Assistant** - An agent that researches a topic and summarizes findings
-- **Decision Helper** - Help users make decisions by analyzing pros/cons
-- **Fact Checker** - Verify claims by reasoning through evidence
-- **Problem Solver** - Break down complex problems into steps
+By completing this challenge, you should be able to:
 
-### Intermediate
-- **Code Explainer** - Explain code step-by-step with reasoning
-- **Travel Planner** - Plan trips with logical reasoning about constraints
-- **Recipe Recommender** - Suggest recipes based on ingredients with reasoning
-- **Debugging Assistant** - Help debug code through systematic analysis
+- **Design** and implement an AI agent using Microsoft Foundry
+- **Instruct** the agent on the task to achieve and incorporate reasoning patterns to enhance the agent's problem-solving abilities
+- **Ground** the AI Agent on data sources relevant to the selected industry or brand
+- **Integrate** the agent with external tools via MCP servers or APIs
 
-### Advanced
-- **Multi-Agent System** - Multiple agents that collaborate on tasks
-- **Self-Correcting Agent** - An agent that validates and improves its own responses
-- **Chain-of-Thought Visualizer** - Show the agent's reasoning process
+---
+
+## 📍Project Milestones
+
+1. **Set up your environment in Microsoft Foundry**:
+    - Access Microsoft Foundry and set up your project
+    - Choose a model suitable for reasoning tasks (e.g., GPT-5.1, GPT-5.2, claude-opus-4-5, etc) and deploy an instance
+    - Launch the playground and familiarize yourself with the interface
+
+2. **Create your agent**:
+    - Create your **social media communication** agent, based on the LLM model you deployed
+    - Define the agent's instructions including:
+        - Task description
+        - Brand/Industry context
+        - Target audience and platforms
+        - Tone and style guidelines
+    - Implement reasoning patterns (e.g., Chain-of-Thought, ReAct)
+    - Test the agent's responses and refine its logic
+
+3. **Add grounding knowledge**:
+    - Integrate relevant data sources (e.g., brand guidelines, industry trends)
+    - Use retrieval techniques to provide context to the agent
+    - Ensure the agent can reference this information in its responses
+    
+> [!TIP]
+> No data source for the chosen use case? Create a *synthetic dataset* - it can be as simple as a file world document or a spreadsheet - using Microsoft 365 Copilot or GitHub Copilot in Visual Studio Code. Then add it to your agent through [*File Search*](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/how-to/tools/file-search?view=foundry&pivots=python). An alternative is to use data from the web via web search tools - such as [*Bing Search tool*](https://learn.microsoft.com/azure/ai-foundry/agents/how-to/tools/bing-tools?view=foundry&pivots=python).
+
+4. **Add external tools**:
+    Integrate external tools to enable your agent to perform actions beyond text generation. You can integrate with tools exposed by remote MCP servers or APIs via OpenAPI. Examples include:
+
+    - Retrieving validated information to inform social posts using knowledge retrieval tools exposed by MCP servers, such as the [Microsoft Learn MCP server](https://github.com/microsoftdocs/mcp).
+    - Saving content drafts in a local file using the [file system MCP server](https://www.npmjs.com/package/@modelcontextprotocol/server-filesystem) tools.
+    - Scheduling posts using a social media management API, such as the [Linkedin API](https://learn.microsoft.com/linkedin/).
+    Feel free to get creative and explore other tools that can enhance your agent's capabilities! A good starting point is to explore the [Visual Studio Code MCP Registry](https://code.visualstudio.com/mcp).
 
 ---
 
 ## 🎯 Quick Start Options
 
-### Option 1: Use Microsoft Foundry Portal (Recommended)
+### Option 1: Use Microsoft Foundry Portal
 
 1. Go to [ai.azure.com](https://ai.azure.com)
-2. Create or select a project
-3. Deploy a model (GPT-4o recommended for reasoning)
-4. Use the **Playground** to prototype your agent
-5. Export your code when ready
+1. Enable the 'New Foundry' toggle at the top to access the latest Foundry experience
+1. Create a project
+1. Deploy a reasoning model from the catalog (e.g. gpt-5.1, gpt-5.2, claude-opus-4-5, etc)
+1. Use the **Playground** to prototype your agent
+1. (Optional) Export your code when ready
 
-### Option 2: Use the Azure AI SDK
+> [!TIP]
+> From the *Code* tab in the Playground, you can also *Open in VSCode for the Web* to access and execute the code in a pre-configured environment in your browser.
+
+Learn more at: [Quickstart: Create a new agent with Foundry Portal](https://learn.microsoft.com/azure/ai-foundry/agents/quickstart?view=foundry-classic&pivots=ai-foundry-portal)
+
+### Option 2: Use the Microsoft Foundry SDK
 
 ```python
 # Install the SDK
-pip install azure-ai-projects azure-identity
+pip install azure-ai-projects
+pip install azure-identity
 
-# Quick example
+# Login to Azure 
+az login
+
+# Instantiate the project client
 from azure.ai.projects import AIProjectClient
 from azure.identity import DefaultAzureCredential
 
-client = AIProjectClient(
-    credential=DefaultAzureCredential(),
-    endpoint="your-foundry-endpoint"
+project_client = AIProjectClient(
+    endpoint=os.getenv("PROJECT_ENDPOINT"),
+    credential=DefaultAzureCredential(),  
 )
 
 # Build your agent logic here
 ```
 
-### Option 3: Use GitHub Models
+Explore the full quickstart example at [Quickstart: Create a new agent with Python Foundry SDK](https://learn.microsoft.com/azure/ai-foundry/agents/quickstart-sdk?view=foundry-classic&pivots=python-sdk).
 
-If you have access to GitHub Models, you can prototype quickly:
-1. Go to [github.com/marketplace/models](https://github.com/marketplace/models)
-2. Try models directly in the browser
-3. Copy the code snippet to your project
+> [!NOTE]
+> The Foundry SDK is available in multiple languages including Python, C#, and Java.
 
 ---
 
 ## 🧠 Reasoning Patterns to Try
 
 ### Chain-of-Thought
+
 Ask the model to think step by step:
+
 ```
 "Let's solve this step by step:
 1. First, I'll identify...
@@ -93,7 +142,9 @@ Ask the model to think step by step:
 ```
 
 ### ReAct (Reasoning + Acting)
+
 Combine thinking with actions:
+
 ```
 Thought: What do I need to find out?
 Action: Search for information
@@ -102,7 +153,9 @@ Thought: Based on this, I should...
 ```
 
 ### Self-Reflection
+
 Have the agent check its own work:
+
 ```
 Initial Answer: [response]
 Reflection: Is this correct? What could be wrong?
@@ -111,21 +164,37 @@ Revised Answer: [improved response]
 
 ---
 
+## 🌟 (Bonus) Going Further
+
+If you have extra time, consider adding some enterprise readiness features to your agent:
+
+- **Evaluation**: Set up evaluation metrics to assess your agent's performance using [Foundry's built-in evaluation tools](https://learn.microsoft.com/azure/ai-foundry/how-to/evaluate-generative-ai-app?view=foundry&preserve-view=true).
+- **Monitoring**: Implement monitoring to track your agent's usage and performance over time.
+- **Safety**: Add safety mitigation layers to ensure your agent adheres to company policy, generate no harmful content, and is protected against prompt injections.
+
+Another suggestion is to further extend your system, enabling your agent to interact with other agents in a **multi-agent architecture**. For example, you can:
+
+- Break down the overall task into smaller, manageable sub-tasks, handled by specialized agents for content ideation, content creation, and content scheduling.
+- Create a reviewer agent that checks the content created by the main agent for quality and compliance.
+
+---
+
 ## 📚 Resources
 
-### Microsoft Foundry
-- [Microsoft Foundry Portal](https://ai.azure.com)
-- [Azure AI Documentation](https://learn.microsoft.com/azure/ai-studio/)
-- [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/)
+### Official Documentation
 
-### Reasoning & Prompting
-- [Prompt Engineering Guide](https://learn.microsoft.com/azure/ai-services/openai/concepts/prompt-engineering)
-- [Chain-of-Thought Prompting](https://www.promptingguide.ai/techniques/cot)
-- [ReAct Pattern](https://www.promptingguide.ai/techniques/react)
+- **Microsoft Foundry Documentation**: [https://learn.microsoft.com/azure/ai-foundry/](https://learn.microsoft.com/azure/ai-foundry/)
+- **Microsoft Foundry Agent Service Overview**: [https://learn.microsoft.com/en-us/azure/ai-foundry/agents/overview?view=foundry&preserve-view=true](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/overview?view=foundry&preserve-view=true)
+- **Microsoft Foundry quick starter**: [https://learn.microsoft.com/training/modules/ai-agent-fundamentals/](https://learn.microsoft.com/training/modules/ai-agent-fundamentals/)
+- **Observability in Microsoft Foundry**: [https://learn.microsoft.com/azure/ai-foundry/control-plane/overview?view=foundry](https://learn.microsoft.com/azure/ai-foundry/control-plane/overview?view=foundry)
+- **Code-first evaluation with Microsoft Foundry SDK**: [https://learn.microsoft.com/azure/ai-foundry/how-to/develop/cloud-evaluation?view=foundry&tabs=python](https://learn.microsoft.com/azure/ai-foundry/how-to/develop/cloud-evaluation?view=foundry&tabs=python)
+- **Responsible AI in Microsoft Foundry**: [https://learn.microsoft.com/azure/ai-foundry/responsible-use-of-ai-overview?view=foundry](https://learn.microsoft.com/azure/ai-foundry/responsible-use-of-ai-overview?view=foundry)
 
-### Code Samples
-- [Azure AI Samples](https://github.com/Azure-Samples/azure-ai-samples)
-- [Azure OpenAI Samples](https://github.com/Azure-Samples/openai)
+### OSS Repos and Samples
+
+- **AI Agents for Beginners Course**: [aka.ms/ai-agents-beginners](https://aka.ms/ai-agents-beginners)
+- **AI assisted development with GitHub Copilot**: [https://github.com/github/awesome-copilot](https://github.com/github/awesome-copilot)
+- **Step-by-step agent building lab**: [https://jolly-field-035345f1e.2.azurestaticapps.net/](https://jolly-field-035345f1e.2.azurestaticapps.net/)
 
 ---
 
@@ -133,7 +202,7 @@ Revised Answer: [improved response]
 
 - **Raise your hand** - Roaming experts are here to help
 - **Ask your tablemates** - Collaborate and learn together
-- **Check Microsoft Foundry docs** - [ai.azure.com](https://ai.azure.com)
+- **Check learning resources above**
 
 ---
 
@@ -141,9 +210,7 @@ Revised Answer: [improved response]
 
 ### What models should I use?
 
-- **GPT-4o** - Great balance of speed and capability
-- **o1 / o3-mini** - Best for complex reasoning tasks
-- **GPT-4o-mini** - Fast and cost-effective for simpler tasks
+You can use any of the reasoning-capable models available in Microsoft Foundry, no matter which provider they come from.
 
 ### Do I need to write code?
 
@@ -158,4 +225,4 @@ Talk to a roaming expert - we can help you get access or find an alternative app
 
 ---
 
-**Good luck! Build an agent that thinks! 🧠**
+**Good luck! And have fun 🚀**
