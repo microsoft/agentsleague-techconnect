@@ -16,7 +16,7 @@ Welcome to the Enterprise Agents track! In this challenge, you will build intell
 > | 💻 **Laptop** | Bring your own laptop with your preferred development environment |
 > | 🎫 **Microsoft 365 Copilot License** | You need an active Microsoft 365 Copilot license to test and deploy agents |
 > | 🏢 **Tenant with Sideloading Enabled** | Access to a Microsoft 365 tenant where you can sideload custom apps for testing |
-> | ☁️ **Azure Subscription** | Required for Custom Engine Agents (CEA) track to deploy and host your agent |
+> | ☁️ **Azure Subscription** | Required to create resources for Custom Engine Agents (CEA) |
 
 ---
 
