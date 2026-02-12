@@ -165,7 +165,7 @@ project_client = AIProjectClient(
 # Build your agent logic here
 ```
 
-Explore the full quickstart example at [Quickstart: Create a new agent with Python Foundry SDK](https://learn.microsoft.com/azure/ai-foundry/agents/quickstart-sdk?view=foundry-classic&pivots=python-sdk).
+Explore the full quickstart example at [Quickstart: Create a new agent with Python Foundry SDK](https://learn.microsoft.com/en-us/azure/ai-foundry/quickstarts/get-started-code?view=foundry-classic&tabs=python).
 
 > [!NOTE]
 > The Foundry SDK is available in multiple languages including Python, C#, and Java.
