@@ -82,13 +82,13 @@ def parse_issue_body(body: str) -> Dict[str, str]:
     if not body:
         return {"project_name": project_name, "repo_url": repo_url}
     
-    # Look for Project Name field (supports both ### and ## headers)
-    project_name_match = re.search(r'##\s+Project Name\s*\n\s*([^\n]+)', body, re.IGNORECASE)
+    # Look for Project Name field (supports both ## and ### headers)
+    project_name_match = re.search(r'#{2,3}\s+Project Name\s*\n\s*([^\n]+)', body, re.IGNORECASE)
     if project_name_match:
         project_name = project_name_match.group(1).strip()
     
-    # Look for Repository URL field (supports both ### and ## headers)
-    repo_url_match = re.search(r'##\s+Repository URL\s*\n\s*([^\n]+)', body, re.IGNORECASE)
+    # Look for Repository URL field (supports both ## and ### headers)
+    repo_url_match = re.search(r'#{2,3}\s+Repository URL\s*\n\s*([^\n]+)', body, re.IGNORECASE)
     if repo_url_match:
         repo_url = repo_url_match.group(1).strip()
     
@@ -174,8 +174,11 @@ def main():
     
     markdown_table = generate_markdown_table(submission_issues)
     
-    # Write to output file
-    output_file = "/home/runner/work/agentsleague-techconnect/agentsleague-techconnect/SUBMISSIONS.md"
+    # Determine output file path - use relative path for flexibility
+    # Check if we're in the repo directory, otherwise use current directory
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_file = os.path.join(script_dir, "SUBMISSIONS.md")
+    
     with open(output_file, 'w') as f:
         f.write(markdown_table)
     
