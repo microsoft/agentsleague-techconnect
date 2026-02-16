@@ -22,17 +22,35 @@ The `SUBMISSIONS.md` file contains a markdown table with the following columns:
 ### Prerequisites
 
 - Python 3.6+
-- Access to GitHub Issues API (via MCP server or cached data)
+- GitHub CLI (`gh`) authenticated (optional, for live fetching)
+- OR a JSON file with GitHub Issues data
 
 ### Using the Script
 
-The script can work with cached GitHub Issues data or fetch fresh data:
+The script can work with a JSON file containing GitHub Issues data or fetch fresh data from GitHub:
 
 ```bash
-# If you have cached issues data from GitHub MCP server
+# Option 1: Using a JSON file with issues data
+python3 generate_submissions_report.py issues.json
+
+# Option 2: Fetch directly from GitHub (requires authenticated gh CLI)
 python3 generate_submissions_report.py
 
 # The script will generate/update SUBMISSIONS.md
+```
+
+### JSON File Format
+
+If providing a JSON file, it should contain an array of GitHub issues with the following fields:
+- `number`: Issue number
+- `title`: Issue title
+- `body`: Issue body (containing project details)
+- `labels`: Array of label objects with `name` field
+- `url`: Issue URL
+
+You can export issues from GitHub using:
+```bash
+gh issue list --repo microsoft/agentsleague-techconnect --state all --limit 1000 --json number,title,body,labels,url > issues.json
 ```
 
 ### Notes

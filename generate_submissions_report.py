@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 """
 Generate a consolidated submissions report from GitHub Issues.
-This script fetches all submission issues and creates a markdown table.
+
+This script processes GitHub issue data and creates a markdown table with submission details.
+
+Usage:
+    python3 generate_submissions_report.py [issues_json_file]
+    
+If no file is provided, the script will attempt to fetch issues using the GitHub CLI (gh).
 """
 
 import json
@@ -14,7 +20,7 @@ from typing import Dict, List, Optional
 
 def fetch_issues_from_github(owner: str, repo: str) -> List[Dict]:
     """Fetch issues from GitHub using gh CLI."""
-    print("Fetching issues from GitHub...", file=sys.stderr)
+    print("Fetching issues from GitHub using gh CLI...", file=sys.stderr)
     
     # Use gh CLI to fetch all issues
     cmd = [
@@ -31,11 +37,40 @@ def fetch_issues_from_github(owner: str, repo: str) -> List[Dict]:
         print(f"Fetched {len(issues)} issues from GitHub", file=sys.stderr)
         return issues
     except subprocess.CalledProcessError as e:
-        print(f"Error fetching issues: {e}", file=sys.stderr)
+        print(f"Error fetching issues from GitHub CLI: {e}", file=sys.stderr)
         print(f"stderr: {e.stderr}", file=sys.stderr)
+        print("\nTip: You can provide a JSON file with issues data as an argument", file=sys.stderr)
+        print("     python3 generate_submissions_report.py issues.json", file=sys.stderr)
         sys.exit(1)
     except json.JSONDecodeError as e:
-        print(f"Error parsing JSON: {e}", file=sys.stderr)
+        print(f"Error parsing JSON from GitHub CLI: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+def load_issues_from_file(filepath: str) -> List[Dict]:
+    """Load issues from a JSON file."""
+    print(f"Loading issues from file: {filepath}", file=sys.stderr)
+    
+    try:
+        with open(filepath, 'r') as f:
+            data = json.load(f)
+        
+        # Handle different JSON structures
+        if isinstance(data, list):
+            issues = data
+        elif isinstance(data, dict) and 'issues' in data:
+            issues = data['issues']
+        else:
+            print(f"Error: Unexpected JSON structure in {filepath}", file=sys.stderr)
+            sys.exit(1)
+        
+        print(f"Loaded {len(issues)} issues from file", file=sys.stderr)
+        return issues
+    except FileNotFoundError:
+        print(f"Error: File not found: {filepath}", file=sys.stderr)
+        sys.exit(1)
+    except json.JSONDecodeError as e:
+        print(f"Error parsing JSON file: {e}", file=sys.stderr)
         sys.exit(1)
 
 
@@ -87,8 +122,12 @@ def main():
     owner = "microsoft"
     repo = "agentsleague-techconnect"
     
-    # Fetch issues from GitHub
-    issues = fetch_issues_from_github(owner, repo)
+    # Check if a JSON file was provided as an argument
+    if len(sys.argv) > 1:
+        issues = load_issues_from_file(sys.argv[1])
+    else:
+        # Try to fetch from GitHub CLI
+        issues = fetch_issues_from_github(owner, repo)
     
     # Filter for submission issues (those with [Submission]: in title or submission-related labels)
     submission_issues = []
